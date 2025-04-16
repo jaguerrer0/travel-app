@@ -1,0 +1,14 @@
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Tours</h1>
+    <button routerLink="/tours/new" class="bg-blue-600 text-white px-4 py-2 rounded mb-4">+ Nuevo Tour</button>
+    <div *ngFor="let tour of tours" class="bg-white shadow p-4 rounded mb-4 flex justify-between items-center">
+      <div>
+        <p class="font-bold">{{ tour.nombre }}</p>
+        <p class="text-sm text-gray-500">Destino: {{ tour.destino }}</p>
+      </div>
+      <div class="space-x-2">
+        <button [routerLink]="['/tours', tour.id]" class="text-blue-600">Editar</button>
+        <button (click)="eliminar(+tour.id)" class="text-red-600">Eliminar</button>
+      </div>
+    </div>
+  </div>

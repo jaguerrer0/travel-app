@@ -1,0 +1,13 @@
+<div class="p-6 max-w-xl mx-auto">
+    <h2 class="text-xl font-semibold mb-4">{{ isEdit ? 'Editar' : 'Crear' }} Tour</h2>
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+      <input class="input" formControlName="nombreTour" placeholder="Nombre del Tour" />
+      <input class="input" formControlName="etapa" placeholder="Etapa" />
+      <input class="input" formControlName="destino" placeholder="Destino" />
+      <input type="date" class="input" formControlName="fechaInicio" />
+      <input type="date" class="input" formControlName="fechaFin" />
+      <input type="number" class="input" formControlName="presupuestoEstimado" placeholder="Presupuesto" />
+
+      <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded" type="submit">Guardar</button>
+    </form>
+  </div>

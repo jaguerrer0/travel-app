@@ -1,0 +1,15 @@
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Reservas</h1>
+    <a routerLink="/reservas/new" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block">+ Nueva Reserva</a>
+
+    <div *ngFor="let r of reservas" class="bg-white p-4 rounded shadow mb-3 flex justify-between">
+      <div>
+        <p class="font-semibold">Tour ID: {{ r.tourId }}, Cliente ID: {{ r.clienteId }}</p>
+        <p class="text-gray-500 text-sm">Adultos: {{ r.adultos }} | Niños mayores: {{ r.ninosMayores }}</p>
+      </div>
+      <div class="space-x-2">
+        <a [routerLink]="['/reservas', r.id]" class="text-blue-600">Editar</a>
+        <button (click)="r.id !== undefined && eliminar(r.id)" class="text-red-600">Eliminar</button>
+      </div>
+    </div>
+  </div>

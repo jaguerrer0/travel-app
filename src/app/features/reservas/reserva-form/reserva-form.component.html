@@ -1,0 +1,11 @@
+<div class="p-6 max-w-lg mx-auto">
+    <h2 class="text-xl font-semibold mb-4">{{ isEdit ? 'Editar' : 'Nueva' }} Reserva</h2>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+      <input class="input" type="number" placeholder="ID Cliente" formControlName="clienteId" />
+      <input class="input" type="number" placeholder="ID Tour" formControlName="tourId" />
+      <input class="input" type="number" placeholder="Adultos" formControlName="adultos" />
+      <input class="input" type="number" placeholder="Niños mayores de 3" formControlName="ninosMayores" />
+      <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">Guardar</button>
+    </form>
+  </div>

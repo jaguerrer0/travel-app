@@ -1,0 +1,8 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <form [formGroup]="form" (ngSubmit)="login()" class="bg-white p-6 rounded shadow w-full max-w-sm">
+      <h2 class="text-xl font-bold mb-4 text-center">Iniciar Sesión</h2>
+      <input formControlName="username" class="input" placeholder="Usuario" />
+      <input type="password" formControlName="password" class="input mt-2" placeholder="Contraseña" />
+      <button class="w-full bg-blue-600 text-white mt-4 py-2 rounded hover:bg-blue-700">Entrar</button>
+    </form>
+  </div>
