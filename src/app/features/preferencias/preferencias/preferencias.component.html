@@ -1,0 +1,33 @@
+<div class="p-6 max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4 text-blue-700">Preferencias de Viaje</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="agregar()" class="space-y-3 mb-6">
+      <input formControlName="clienteId" type="number" placeholder="ID del Cliente" class="input" />
+  
+      <select formControlName="categoria" class="input">
+        <option value="">Selecciona una categoría</option>
+        <option value="Playa">Playa</option>
+        <option value="Cultura">Cultura</option>
+        <option value="Aventura">Aventura</option>
+        <option value="Gastronomía">Gastronomía</option>
+      </select>
+  
+      <input formControlName="destinoFavorito" type="text" placeholder="Destino Favorito" class="input" />
+      <input formControlName="presupuestoMaximo" type="number" placeholder="Presupuesto Máximo" class="input" />
+      <textarea formControlName="comentariosAdicionales" placeholder="Comentarios..." class="input"></textarea>
+  
+      <button class="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700 transition">
+        Guardar Preferencia
+      </button>
+    </form>
+  
+    <div *ngFor="let p of preferencias" class="bg-white p-4 mt-4 shadow rounded flex justify-between items-start">
+      <div>
+        <p class="font-bold text-lg">{{ p.destinoFavorito }} ({{ p.categoria }})</p>
+        <p class="text-gray-600 text-sm">Cliente ID: {{ p.clienteId }} | Presupuesto: ${{ p.presupuestoMaximo }}</p>
+        <p class="text-sm italic mt-1" *ngIf="p.comentariosAdicionales">"{{ p.comentariosAdicionales }}"</p>
+      </div>
+      <button (click)="eliminar(p.id!)" class="text-red-600 hover:underline">Eliminar</button>
+    </div>
+  </div>
+  

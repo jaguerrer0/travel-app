@@ -22,10 +22,10 @@ export class LoginComponent {
   
     // Usuario demo hardcodeado
     if (username === 'demo' && password === 'demo123') {
-      const fakeToken = 'fake-jwt-token-demo';
+      const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGVtbyIsInJvbGUiOiJBZG1pbiIsIm5hbWVpZCI6ImRlbW8xMjMifQ.123456';
   
       localStorage.setItem('token', fakeToken);
-      this.router.navigate(['/tours']);
+      this.router.navigate(['/dashboard']);
     } else {
       alert('Credenciales inválidas. Usa demo / demo123');
     }

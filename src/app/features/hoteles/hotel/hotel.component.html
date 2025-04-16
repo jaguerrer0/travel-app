@@ -1,0 +1,20 @@
+<div class="p-6 max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4 text-blue-700">Hoteles Recomendados</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="agregar()" class="space-y-3 mb-6">
+      <input formControlName="tourId" placeholder="ID del Tour" class="input" type="number" />
+      <input formControlName="nombreHotel" placeholder="Nombre del Hotel" class="input" />
+      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition w-full">
+        Agregar Hotel
+      </button>
+    </form>
+  
+    <div *ngFor="let h of hoteles" class="bg-white p-4 shadow rounded mb-3 flex justify-between items-center">
+      <div>
+        <p class="font-semibold text-lg">{{ h.nombreHotel }}</p>
+        <p class="text-sm text-gray-600">Tour ID: {{ h.tourId }}</p>
+      </div>
+      <button (click)="eliminar(h.id!)" class="text-red-600 hover:underline">Eliminar</button>
+    </div>
+  </div>
+  

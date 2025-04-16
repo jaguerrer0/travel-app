@@ -1,0 +1,35 @@
+<nav class="bg-blue-600 text-white px-4 py-3 flex items-center justify-between flex-wrap">
+  <!-- Logo -->
+  <div class="flex items-center space-x-2">
+    <span class="text-xl font-bold">ViajesPro</span>
+  </div>
+
+  <div class="lg:hidden">
+    <button (click)="menuOpen = !menuOpen">
+      <lucide-icon name="menu" class="w-6 h-6 text-white"></lucide-icon>
+    </button>
+  </div>
+
+  <!-- Opciones + Usuario -->
+  <div [ngClass]="{ 'block': menuOpen, 'hidden': !menuOpen }" class="w-full lg:flex lg:items-center lg:w-auto">
+    <div class="pt-4 lg:pt-0 space-y-2 lg:space-y-0 lg:space-x-6 text-sm lg:flex-grow">
+      <a routerLink="/dashboard" class="block lg:inline-block hover:underline">Inicio</a>
+
+      <a *ngIf="role === 'admin'" routerLink="/tours" class="block lg:inline-block hover:underline">Tours</a>
+      <a *ngIf="role === 'admin'" routerLink="/clientes" class="block lg:inline-block hover:underline">Clientes</a>
+      <a *ngIf="role === 'admin'" routerLink="/reservas" class="block lg:inline-block hover:underline">Reservas</a>
+
+      <a *ngIf="role === 'cliente'" routerLink="/mi-cuenta" class="block lg:inline-block hover:underline">Mi Cuenta</a>
+
+      <a routerLink="/cotizador" class="block lg:inline-block hover:underline">Cotizador</a>
+    </div>
+
+    <!-- Usuario logueado -->
+    <div class="pt-4 lg:pt-0 flex items-center space-x-2 ml-0 lg:ml-6 lg:border-l lg:pl-6 border-white">
+      <img src="https://www.gravatar.com/avatar?d=mp" class="w-8 h-8 rounded-full border border-white" alt="avatar" />
+      <span class="text-sm">{{ nombre }}</span>
+      <button (click)="logout()" class="ml-4 text-sm underline">Cerrar sesión</button>
+    </div>
+
+  </div>
+</nav>

@@ -1,0 +1,18 @@
+<div class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="bg-white shadow p-4 rounded text-center">
+      <p class="text-2xl font-bold">{{ stats.tours }}</p>
+      <p class="text-sm text-gray-600">Tours</p>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+      <p class="text-2xl font-bold">{{ stats.clientes }}</p>
+      <p class="text-sm text-gray-600">Clientes</p>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+      <p class="text-2xl font-bold">{{ stats.reservas }}</p>
+      <p class="text-sm text-gray-600">Reservas</p>
+    </div>
+    <div class="bg-white shadow p-4 rounded text-center">
+      <p class="text-2xl font-bold">{{ stats.totalPresupuesto | currency }}</p>
+      <p class="text-sm text-gray-600">Presupuesto Total</p>
+    </div>
+  </div>
