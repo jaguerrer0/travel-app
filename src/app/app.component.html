@@ -1,2 +1,16 @@
-<app-header *ngIf="showHeader"></app-header>
-<router-outlet></router-outlet>
+    <div class="min-h-screen text-gray-900 dark:text-white bg-white dark:bg-gray-900 transition-all duration-300">
+
+        <app-header
+          *ngIf="showHeader"
+          (menuStateChanged)="onMenuStateChanged($event)"
+          (themeToggled)="onThemeToggled($event)"
+          [isDark]="isDarkTheme"
+        ></app-header>
+      
+        <div [class.ml-64]="menuOpen" class="transition-all duration-300">
+          <div>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+      

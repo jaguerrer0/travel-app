@@ -12,19 +12,32 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   showHeader = false;
+  menuOpen = false;
+  isDarkTheme = false;
 
   constructor(private router: Router) {
-    this.router.events
-  .pipe(filter(event => event instanceof NavigationEnd))
-  .subscribe(() => {
-    const token = localStorage.getItem('token');
-    const url = this.router.url;
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      const token = localStorage.getItem('token');
+      const url = this.router.url;
+      this.showHeader = !!token && !url.includes('login');
+    });
 
-    console.log('Token:', token);
-    console.log('Ruta:', url);
+    const theme = localStorage.getItem('theme');
+    this.isDarkTheme = theme === 'dark';
+    this.updateHtmlThemeClass();
+  }
 
-    this.showHeader = !!token && !url.includes('login');
-  });
+  onMenuStateChanged(open: boolean) {
+    this.menuOpen = open;
+  }
 
+  onThemeToggled(isDark: boolean) {
+    this.isDarkTheme = isDark;
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    this.updateHtmlThemeClass();
+  }
+
+  updateHtmlThemeClass() {
+    document.documentElement.classList.toggle('dark', this.isDarkTheme);
   }
 }

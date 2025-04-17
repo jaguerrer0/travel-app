@@ -1,35 +1,90 @@
-<nav class="bg-blue-600 text-white px-4 py-3 flex items-center justify-between flex-wrap">
-  <!-- Logo -->
-  <div class="flex items-center space-x-2">
-    <span class="text-xl font-bold">ViajesPro</span>
-  </div>
+<div class="flex transition-all duration-300" [class.ml-64]="menuOpen">
+  <!-- Menú lateral -->
+  <aside
+    *ngIf="menuOpen"
+    class="fixed top-0 left-0 h-screen w-64 bg-white dark:bg-gray-900 text-gray-800 dark:text-white z-40 shadow-lg transition-transform duration-300"
+  >
+    <div class="flex items-center justify-between p-4 border-b border-gray-300 dark:border-gray-700">
+      <span class="text-lg font-semibold">Menú</span>
+      <button (click)="toggleMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <nav class="p-4 space-y-2">
+      <a (click)="navigateAndClose('/dashboard')" class="block hover:underline">Inicio</a>
+      <a *ngIf="role === 'admin'" (click)="navigateAndClose('/tours')" class="block hover:underline">Tours</a>
+      <a *ngIf="role === 'admin'" (click)="navigateAndClose('/clientes')" class="block hover:underline">Clientes</a>
+      <a *ngIf="role === 'admin'" (click)="navigateAndClose('/reservas')" class="block hover:underline">Reservas</a>
+      <a *ngIf="role === 'cliente'" (click)="navigateAndClose('/mi-cuenta')" class="block hover:underline">Mi Cuenta</a>
+      <a (click)="navigateAndClose('/cotizador')" class="block hover:underline">Cotizador</a>
+    </nav>
+  </aside>
 
-  <div class="lg:hidden">
-    <button (click)="menuOpen = !menuOpen">
-      <lucide-icon name="menu" class="w-6 h-6 text-white"></lucide-icon>
-    </button>
-  </div>
-
-  <!-- Opciones + Usuario -->
-  <div [ngClass]="{ 'block': menuOpen, 'hidden': !menuOpen }" class="w-full lg:flex lg:items-center lg:w-auto">
-    <div class="pt-4 lg:pt-0 space-y-2 lg:space-y-0 lg:space-x-6 text-sm lg:flex-grow">
-      <a routerLink="/dashboard" class="block lg:inline-block hover:underline">Inicio</a>
-
-      <a *ngIf="role === 'admin'" routerLink="/tours" class="block lg:inline-block hover:underline">Tours</a>
-      <a *ngIf="role === 'admin'" routerLink="/clientes" class="block lg:inline-block hover:underline">Clientes</a>
-      <a *ngIf="role === 'admin'" routerLink="/reservas" class="block lg:inline-block hover:underline">Reservas</a>
-
-      <a *ngIf="role === 'cliente'" routerLink="/mi-cuenta" class="block lg:inline-block hover:underline">Mi Cuenta</a>
-
-      <a routerLink="/cotizador" class="block lg:inline-block hover:underline">Cotizador</a>
+  <!-- Barra superior -->
+  <nav class="w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white px-4 py-3 flex items-center justify-between border-b border-gray-300 dark:border-gray-700 z-30 relative">
+    <!-- Logo + hamburguesa -->
+    <div class="flex items-center gap-4">
+      <button (click)="toggleMenu()" class="lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <span class="text-xl font-bold">ViajesPro</span>
     </div>
 
-    <!-- Usuario logueado -->
-    <div class="pt-4 lg:pt-0 flex items-center space-x-2 ml-0 lg:ml-6 lg:border-l lg:pl-6 border-white">
-      <img src="https://www.gravatar.com/avatar?d=mp" class="w-8 h-8 rounded-full border border-white" alt="avatar" />
-      <span class="text-sm">{{ nombre }}</span>
-      <button (click)="logout()" class="ml-4 text-sm underline">Cerrar sesión</button>
+    <!-- Enlaces principales (desktop) -->
+    <div class="hidden lg:flex gap-6 items-center text-sm">
+      <a routerLink="/dashboard" class="hover:underline">Inicio</a>
+      <a *ngIf="role === 'admin'" routerLink="/tours" class="hover:underline">Tours</a>
+      <a *ngIf="role === 'admin'" routerLink="/clientes" class="hover:underline">Clientes</a>
+      <a *ngIf="role === 'admin'" routerLink="/reservas" class="hover:underline">Reservas</a>
+      <a *ngIf="role === 'cliente'" routerLink="/mi-cuenta" class="hover:underline">Mi Cuenta</a>
+      <a routerLink="/cotizador" class="hover:underline">Cotizador</a>
     </div>
 
-  </div>
-</nav>
+    <!-- Iconos y perfil -->
+    <div class="flex items-center gap-4">
+      <!-- Dark mode -->
+      <button (click)="toggleDarkMode()" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M21 12.79A9 9 0 0111.21 3a7 7 0 000 14.59A9 9 0 0121 12.79z" />
+        </svg>
+      </button>
+
+      <!-- Notificaciones -->
+      <button class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+      </button>
+
+      <!-- Buscar -->
+      <button class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </button>
+
+      <!-- Perfil y logout -->
+      <div class="flex items-center gap-2 border-l border-gray-300 dark:border-white pl-4 relative group">
+        <img src="https://www.gravatar.com/avatar?d=mp" class="w-8 h-8 rounded-full border border-white" alt="avatar" />
+        <span class="text-sm hidden md:inline">{{ nombre }}</span>
+        <button (click)="logout()" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+            <polyline points="10 17 15 12 10 7" />
+            <line x1="15" y1="12" x2="3" y2="12" />
+          </svg>
+          <div class="absolute top-full mt-1 left-1/2 -translate-x-1/2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition">
+            Cerrar sesión
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+</div>
